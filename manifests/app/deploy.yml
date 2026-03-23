@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-todo-app
+  namespace: demo-todo
+  labels:
+    app: demo-todo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-todo-app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: demo-todo-app
+    spec:
+      containers:
+      - name: demo-todo-app
+        image: zinlinhtetdevops/demo-todo-app:latest
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - secretRef:
+            name: demo-todo-secret
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
