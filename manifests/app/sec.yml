@@ -5,7 +5,7 @@ metadata:
   namespace: demo-todo
 type: Opaque
 stringData:
-  DATABASE_URL: "postgresql://dbadmin:DBadmin123@demo-todo-rds.chgcqs4emz78.ap-southeast-1.rds.amazonaws.com:5432/todos"
+  DATABASE_URL: "postgresql://dbadmin:DBadmin123@demo-todo-rds.chgcqs4emz78.ap-southeast-1.rds.amazonaws.com:5432/uatdb"
   TELEGRAM_BOT_TOKEN: "8607206543:AAGJYLKqg2UorZaH7pVGJgoFKTNK5qMNozg"
   TELEGRAM_CHAT_ID: "1661116499"
 
