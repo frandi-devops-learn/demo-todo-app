@@ -3,11 +3,10 @@ kind: Secret
 metadata:
   name: demo-todo-secret
   namespace: demo-todo
+  annotations:
+    avp.kubernetes.io/path: "secret/data/demo-todo"
 type: Opaque
 stringData:
-  # Path for Database URL
   DATABASE_URL: "<path:secret/data/demo-todo/db#DATABASE_URL>"
-  
-  # Path for Telegram credentials
   TELEGRAM_BOT_TOKEN: "<path:secret/data/demo-todo/tg#TELEGRAM_BOT_TOKEN>"
   TELEGRAM_CHAT_ID: "<path:secret/data/demo-todo/tg#TELEGRAM_CHAT_ID>"
