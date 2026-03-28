@@ -7,6 +7,6 @@ metadata:
     avp.kubernetes.io/path: "secret/data/demo-todo"
 type: Opaque
 stringData:
-  DATABASE_URL: "<path:secret/data/demo-todo/db#DATABASE_URL>"
-  TELEGRAM_BOT_TOKEN: "<path:secret/data/demo-todo/tg#TELEGRAM_BOT_TOKEN>"
-  TELEGRAM_CHAT_ID: "<path:secret/data/demo-todo/tg#TELEGRAM_CHAT_ID>"
+  DATABASE_URL: "db#DATABASE_URL>"
+  TELEGRAM_BOT_TOKEN: "tg#TELEGRAM_BOT_TOKEN>"
+  TELEGRAM_CHAT_ID: "tg#TELEGRAM_CHAT_ID>"
