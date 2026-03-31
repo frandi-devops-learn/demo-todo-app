@@ -13,4 +13,4 @@ spec:
     metadata:
       creationTimestamp: null
       name: demo-todo-secret
-      namespace: demo-todo
+      #namespace: demo-todo
