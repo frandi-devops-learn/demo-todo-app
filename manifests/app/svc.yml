@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: demo-todo-svc
+  namespace: demo-todo
   labels:
     app: demo-todo-app
 spec:
