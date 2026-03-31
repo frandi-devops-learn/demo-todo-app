@@ -4,7 +4,7 @@ metadata:
   labels:
     app: demo-todo-app
   name: demo-todo-svc
-  namespace: demo-todo
+  #namespace: demo-todo
 spec:
   ports:
   - port: 80
