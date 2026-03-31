@@ -16,6 +16,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: demo-todo-app
+            name: demo-todo-svc
             port:
               number: 80

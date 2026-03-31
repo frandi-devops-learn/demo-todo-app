@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: demo-todo-app
-  name: demo-todo-app
+  name: demo-todo-svc
   namespace: demo-todo
 spec:
   ports:
