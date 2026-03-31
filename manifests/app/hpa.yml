@@ -2,7 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: demo-todo-app
-  #namespace: demo-todo
+  namespace: demo-todo
 spec:
   maxReplicas: 8
   metrics:
