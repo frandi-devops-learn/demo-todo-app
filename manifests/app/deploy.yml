@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-todo-app
-  namespace: demo-todo
+  #namespace: demo-todo
   labels:
     app: demo-todo-app
 spec:
