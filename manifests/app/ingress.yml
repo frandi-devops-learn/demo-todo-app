@@ -1,22 +1,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: demo-todo-ingress
+  name: demo-todo-alb
   namespace: demo-todo
   annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/group.name: main-alb
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/success-codes: "200,301,302"
+
 spec:
-  ingressClassName: nginx
+  ingressClassName: alb
   rules:
-  - host: todo.frandisharing.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: demo-todo-svc
-            port:
-              number: 80
+    - host: todo.frandisharing.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: demo-todo-svc
+                port:
+                  number: 80
