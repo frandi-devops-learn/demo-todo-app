@@ -19,10 +19,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and pushDocker image
+      - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/demo-todo-app:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/demo-todo-app:${{ github.sha }}
