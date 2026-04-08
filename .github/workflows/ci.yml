@@ -8,6 +8,9 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write  # Needed to push to manifest repo
 
     steps:
       - name: Checkout code
@@ -30,3 +33,26 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/demo-todo-app:${{ steps.vars.outputs.sha_short }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/demo-todo-app:latest
+
+      - name: Checkout manifest repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ secrets.MANIFEST_REPO }}
+          path: manifests/app
+          token: ${{ secrets.MANIFEST_REPO_TOKEN }}
+
+      - name: Update image tag in manifest
+        run: |
+          cd manifests/app
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/demo-todo-app:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/demo-todo-app:${{ steps.vars.outputs.sha_short }}|g" \
+            base/deploy.yml
+          
+      - name: Commit and push changes
+        run: |
+          cd manifest-repo
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Update image tag to ${{ steps.vars.outputs.sha_short }} [skip ci]" || echo "No changes to commit"
+          git push
