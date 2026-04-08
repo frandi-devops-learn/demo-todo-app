@@ -43,13 +43,13 @@ jobs:
 
       - name: Update image tag in manifest
         run: |
-          cd manifests/app
+          cd manifests/app/demo-todo-app-K8s/manifests/app
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/demo-todo-app:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/demo-todo-app:${{ steps.vars.outputs.sha_short }}|g" \
             deploy.yml
           
       - name: Commit and push changes
         run: |
-          cd manifests/app
+          cd manifests/app/demo-todo-app-K8s/manifests/app
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add .
